@@ -197,12 +197,13 @@ root@cbe84007dedc:/> exit
 
 # start container
 $ docker start demo
-root@cbe84007dedc:/>
 
-# detach/attach container
-root@cbe84007dedc:/> Ctrl-p + Ctrl-q
+# attach to the running container
 $ docker attach demo
 root@cbe84007dedc:/>
+
+# detach container leaving container started
+root@cbe84007dedc:/> Ctrl-p + Ctrl-q
 </code></pre>
 
 --
@@ -297,8 +298,24 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 # Define default command.
 CMD ["bash"]</code></pre>
 
-<pre class="fragment"><code class="bash"># Build image from Dockerfile
+--
+
+<h2>5. Automated image build &laquo; <span style="color:#005976;">Dockerfile</span></h2>
+
+&nbsp;
+
+A Dockerfile to start Bonita BPM Subscription
+
+Tomcat bundle with version in
+
+{ 6.0.0, 6.1.0, 6.2.0, 6.3.0, 6.4.0 }
+
+<pre><code class="bash"># Build image from Dockerfile
 path/to/Dockerfile $ docker build -t $USER/demomo .</code></pre>
+
+<pre><code class="bash"># Run container with parameters
+$ docker run --name b600 -e "bonita_version=6.0.0" -e "tomcat_version=6.0.35" \
+-d -P -v /demo/lic/6.0.0:/lic $USER/demomo</code></pre>
 
 ----
 
