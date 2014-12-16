@@ -160,7 +160,8 @@ On top of images Docker creates writable layers called **`containers`**
 <pre><code class="bash">$ sudo service docker start</code></pre>
 
 1. A **command-line client** to build images and manage containers
-<pre><code class="bash">$ docker info|build|images|run|ps|exec|start|stop|rm
+<pre><code class="bash">$ docker info|build|images|save|load
+$ docker run|ps|exec|start|stop|rm
 $ docker search|pull|push</code></pre>
 
 1. Public and private Docker **image registries**
@@ -177,6 +178,7 @@ $ docker search|pull|push</code></pre>
 1. Detached container
 1. Versioned filesystem
 1. Saving a container state to an image
+1. Image backup/restore
 1. Automated image build &laquo; Dockerfile
 
 --
@@ -276,7 +278,23 @@ $ docker run $USER/demo /bin/ls -l /tmp</code></pre>
 
 --
 
-<h2>5. Automated image build &laquo; <span style="color:#005976;">Dockerfile</span></h2>
+## 5. Image backup/restore
+
+<pre><code class="bash"># saving image to tarred repository
+$ docker save $USER/demo > demo.tar
+
+# delete image from local repository
+$ docker rmi $USER/demo
+
+# load image backup to local repository
+$ docker load -i demo.tar
+
+# create new container and look at /tmp
+$ docker run $USER/demo /bin/ls -l /tmp</code></pre>
+
+--
+
+<h2>6. Automated image build &laquo; <span style="color:#005976;">Dockerfile</span></h2>
 
 Docker can **`build`** images automatically
 
@@ -300,7 +318,7 @@ CMD ["bash"]</code></pre>
 
 --
 
-<h2>5. Automated image build &laquo; <span style="color:#005976;">Dockerfile</span></h2>
+<h2>6. Automated image build &laquo; <span style="color:#005976;">Dockerfile</span></h2>
 
 &nbsp;
 
@@ -321,13 +339,15 @@ $ docker run --name b600 -e "bonita_version=6.0.0" -e "tomcat_version=6.0.35" \
 
 ## Docker @ Bonitasoft
 
-<img src="jenkins.png" height="150" />
+<img src="jenkins.png" height="100" />
 <br>
-<img src="sonarqube.png" height="80" /> &nbsp; <img src="postgresql.png" height="80" />
+<img src="Bonitasoft-logo.png" height="60" /> &nbsp; <i class="fa fa-lock"></i>
 <br>
-<img src="nodejs.png" height="80" /> &nbsp; <img src="npm.png" height="80" /> &nbsp; <img src="docker-registry.png" height="80" />
+<img src="sonarqube.png" height="60" /> &nbsp; <img src="postgresql.png" height="60" />
 <br>
-<img src="nginx.png" height="80" /> &nbsp; <img src="php.png" height="80" /> &nbsp; <img src="mysql.png" height="80" />
+<img src="nodejs.png" height="60" /> &nbsp; <img src="npm.png" height="60" /> &nbsp; <img src="docker-registry.png" height="60" />
+<br>
+<img src="nginx.png" height="60" /> &nbsp; <img src="php.png" height="60" /> &nbsp; <img src="mysql.png" height="60" />
 
 ----
 
@@ -351,11 +371,15 @@ thanks to **`iptables`** NAT rules
 
 ----
 
-## Documentation
+## Links & Documentation
 
 &nbsp;
 
 https://www.docker.com &nbsp;<i class="fa fa-external-link"></i>
+
+[Boot2Docker](https://github.com/boot2docker/boot2docker) &nbsp;<i class="fa fa-github-square"></i>
+
+- - -
 
 [Docker for Bonitasoft CI on GitHub](https://github.com/bonitasoft/bonita-internal-tools/tree/master/ci/docker) &nbsp;<i class="fa fa-github-square"></i>
 
